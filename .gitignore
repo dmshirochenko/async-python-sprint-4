@@ -5,6 +5,7 @@ creds.ini
 *.pkl
 examples/
 postgres_instance/
+shortener.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
