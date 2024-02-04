@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 import validators
 from fastapi import APIRouter, Depends, HTTPException, status, Header
@@ -6,10 +6,10 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from src.services.url_services import create_db_url
+from src.services.url_services import create_db_url, fetch_user_links
 from src.db.db_connector import get_async_session
 from src.models.models import User
-from src.models.schemas import URLBase
+from src.models.schemas import URLBase, LinkResponse
 
 router = APIRouter()
 
@@ -50,3 +50,14 @@ async def create_url(
 
     await create_db_url(db=db, url=url, user_id=user.id)
     return JSONResponse(content={"message": "Link has been successfully added"}, status_code=status.HTTP_201_CREATED)
+
+
+@router.get("/user/status", response_model=List[LinkResponse])
+async def get_user_links(db: AsyncSession = Depends(get_async_session), token: str = Depends(token_dependency)):
+    user = await get_user_by_token(db, token)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authorized or user not found")
+
+    formatted_links = await fetch_user_links(db, user.id)
+
+    return formatted_links

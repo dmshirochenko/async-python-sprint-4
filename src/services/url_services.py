@@ -1,7 +1,8 @@
-from typing import Optional
+from typing import Optional, List
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.datastructures import URL
+from sqlalchemy.future import select
 
 from src.db import keygen
 from src.models.models import URL
@@ -22,6 +23,17 @@ async def create_db_url(db: AsyncSession, url: URLBase, user_id: Optional[int] =
     await db.refresh(db_url)
 
     return db_url
+
+
+async def fetch_user_links(db: AsyncSession, user_id: int) -> List[dict]:
+    result = await db.execute(select(URL).filter(URL.user_id == user_id))
+    links = result.scalars().all()
+
+    response = [
+        {"short_id": link.key, "short_url": link.short_url, "original_url": link.target_url, "type": link.type}
+        for link in links
+    ]
+    return response
 
 
 """
