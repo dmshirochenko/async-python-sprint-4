@@ -12,6 +12,13 @@ class URLBase(BaseModel):
     type: URLType = URLType.public
 
 
+class LinkResponse(BaseModel):
+    short_id: str
+    short_url: str
+    original_url: str
+    type: str
+
+
 class UserSchema(BaseModel):
     id: int
     username: str
