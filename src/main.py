@@ -1,32 +1,11 @@
-
-
-"""
-import validators
-
-from fastapi import Depends, FastAPI, HTTPException, Request
-from fastapi.responses import RedirectResponse
-from sqlalchemy.orm import Session
-from starlette.datastructures import URL
-
-from src.core.config import settings
-from src.models import models, schemas
-from src.db.db_connector import SessionLocal, engine
-from src.db.db_operations import (
-    create_db_url,
-    get_db_url_by_key,
-    get_db_url_by_secret_key,
-    deactivate_db_url_by_secret_key,
-)
-"""
 from fastapi import FastAPI
-from src.models import models
-from src.db.db_connector import engine
-from src.api.v1 import url_routes
+from src.api.v1 import url_routes, users_routes
 
 
 app = FastAPI()
 
 app.include_router(url_routes.router)
+app.include_router(users_routes.router)
 
 
 """
