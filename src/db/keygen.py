@@ -1,18 +1,7 @@
 import secrets
 import string
 
-from sqlalchemy.orm import Session
 
-from src.db import db_operations
-
-
-def create_random_key(length: int = 5) -> str:
+def create_random_key(length: int = 8) -> str:
     chars = string.ascii_uppercase + string.digits
     return "".join(secrets.choice(chars) for _ in range(length))
-
-
-def create_unique_random_key(db: Session) -> str:
-    key = create_random_key()
-    while db_operations.get_db_url_by_key(db, key):
-        key = create_random_key()
-    return key
