@@ -12,9 +12,9 @@ ENV_FILE_PATH = os.path.join(BASE_DIR, env_file)
 class Settings(BaseSettings):
     app_debug_level: str = Field("INFO", env="APP_DEBUG_LEVEL")
     base_dir: str = Field(BASE_DIR)
-    env_name: str = "Local"
-    base_url: str = "http://localhost:8000"
-    db_url: str = "sqlite:///./shortener.db"
+    env_name: str = os.getenv("ENV_NAME")
+    base_url: str = os.getenv("BASE_URL")
+    db_url: str = os.getenv("DATABASE_URL")
 
     class Config:
         env_file = ENV_FILE_PATH

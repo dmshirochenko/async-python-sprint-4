@@ -1,0 +1,25 @@
+# Ignore common version control system directories and files
+.git
+.gitignore
+.svn
+
+# Ignore editor-specific files
+*.swp
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore Python-specific files
+__pycache__/
+*.pyc
+
+# Ignore system and temporary files
+.DS_Store
+Thumbs.db
+*~
+*.log
+
+# Ignore virtual environments (assuming you use venv or virtualenv)
+venv/
+.venv/
