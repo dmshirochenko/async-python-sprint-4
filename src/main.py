@@ -1,5 +1,6 @@
-# shortener_app/main.py
 
+
+"""
 import validators
 
 from fastapi import Depends, FastAPI, HTTPException, Request
@@ -14,39 +15,21 @@ from src.db.db_operations import (
     create_db_url,
     get_db_url_by_key,
     get_db_url_by_secret_key,
-    update_db_clicks,
     deactivate_db_url_by_secret_key,
 )
+"""
+from fastapi import FastAPI
+from src.models import models
+from src.db.db_connector import engine
+from src.api.v1 import url_routes
+
 
 app = FastAPI()
-models.Base.metadata.create_all(bind=engine)
+
+app.include_router(url_routes.router)
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-def get_admin_info(db_url: models.URL) -> schemas.URLInfo:
-    base_url = URL(settings.base_url)
-    admin_endpoint = app.url_path_for("administration info", secret_key=db_url.secret_key)
-    db_url.url = str(base_url.replace(path=db_url.key))
-    db_url.admin_url = str(base_url.replace(path=admin_endpoint))
-    return db_url
-
-
-def raise_bad_request(message):
-    raise HTTPException(status_code=400, detail=message)
-
-
-def raise_not_found(request):
-    message = f"URL '{request.url}' doesn't exist"
-    raise HTTPException(status_code=404, detail=message)
-
-
+"""
 @app.get("/")
 def read_root():
     return "Welcome to the URL shortener API :)"
@@ -86,3 +69,4 @@ def delete_url(secret_key: str, request: Request, db: Session = Depends(get_db))
         return {"detail": message}
     else:
         raise_not_found(request)
+"""

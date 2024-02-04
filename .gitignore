@@ -6,6 +6,7 @@ creds.ini
 examples/
 postgres_instance/
 shortener.db
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
