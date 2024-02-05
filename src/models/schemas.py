@@ -12,8 +12,14 @@ class URLBase(BaseModel):
     type: URLType = URLType.public
 
 
+class URLResponse(BaseModel):
+    key: str
+    short_url: str
+    target_url: str
+
+
 class LinkResponse(BaseModel):
-    short_id: str
+    key: str
     short_url: str
     original_url: str
     type: str

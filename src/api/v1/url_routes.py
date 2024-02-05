@@ -10,7 +10,7 @@ from sqlalchemy.future import select
 from src.services.url_services import create_db_url, fetch_user_links, get_db_url_by_key, deactivate_db_url_by_key
 from src.db.db_connector import get_async_session
 from src.models.models import User
-from src.models.schemas import URLBase, LinkResponse
+from src.models.schemas import URLBase, LinkResponse, URLResponse
 
 router = APIRouter()
 
@@ -42,7 +42,7 @@ async def ping_database(db: AsyncSession = Depends(get_async_session)):
         raise HTTPException(status_code=503, detail="Database is not reachable")
 
 
-@router.post("/v1/url")
+@router.post("/v1/url", response_model=URLResponse, status_code=status.HTTP_201_CREATED)
 async def create_url(
     url: URLBase, db: AsyncSession = Depends(get_async_session), token: str = Depends(token_dependency)
 ):
@@ -53,8 +53,8 @@ async def create_url(
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authorized or user not found")
 
-    await create_db_url(db=db, url=url, user_id=user.id)
-    return JSONResponse(content={"message": "Link has been successfully added"}, status_code=status.HTTP_201_CREATED)
+    db_url = await create_db_url(db=db, url=url, user_id=user.id)
+    return {"key": db_url.key, "short_url": db_url.short_url, "target_url": db_url.target_url}
 
 
 @router.delete("/v1/url/{key}")

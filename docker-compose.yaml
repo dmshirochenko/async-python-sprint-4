@@ -41,5 +41,18 @@ services:
     networks:
       - network_for_fast_api
 
+  test-service:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    container_name: test-service
+    env_file:
+      - .env
+    depends_on:
+      fast-api-server:
+        condition: service_healthy
+    networks:
+      - network_for_fast_api
+
 networks:
   network_for_fast_api:
