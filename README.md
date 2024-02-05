@@ -1,3 +1,30 @@
+# Server Installation
+
+1. **Clone the Repository**
+   ```
+   git clone git@github.com:dmshirochenko/async-python-sprint-3.git
+   ```
+2. **.ENV file creation**
+    Create .env file using .env.example
+2. **To Start the Server**
+   ```
+   make start
+   ```
+3. **To Stop the Server**
+   ```
+   make stop
+4. **Open API documentation**
+   For a server running on localhost, access it via:
+   http://127.0.0.1:8000/docs
+
+
+
+# Endpoint Documentation
+Available at the /docs path. 
+For a server running on localhost, access it via:
+http://127.0.0.1:8000/docs
+
+
 # Проектное задание четвёртого спринта
 
 Спроектируйте и реализуйте сервис для создания сокращённой формы передаваемых URL и анализа активности их использования.
