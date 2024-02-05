@@ -34,7 +34,7 @@ services:
     env_file:
       - .env
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://fast-api-server:8000/v1/health || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://fast-api-server:8000/v1/ping || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 3
