@@ -2,7 +2,7 @@
 
 1. **Clone the Repository**
    ```
-   git clone git@github.com:dmshirochenko/async-python-sprint-3.git
+   git clone git@github.com:dmshirochenko/async-python-sprint-4.git
    ```
 2. **.ENV file creation**
     ```
