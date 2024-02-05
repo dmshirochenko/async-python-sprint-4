@@ -13,7 +13,7 @@
     make start
     ```
 3. **To Stop the Server**
-    
+    ```
     make stop
     ```
 4. **Open API documentation**
