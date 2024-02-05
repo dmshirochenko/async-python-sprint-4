@@ -30,7 +30,7 @@ async def fetch_user_links(db: AsyncSession, user_id: int) -> List[dict]:
     links = result.scalars().all()
 
     response = [
-        {"short_id": link.key, "short_url": link.short_url, "original_url": link.target_url, "type": link.type}
+        {"key": link.key, "short_url": link.short_url, "original_url": link.target_url, "type": link.type}
         for link in links
     ]
     return response

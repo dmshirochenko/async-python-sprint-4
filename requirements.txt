@@ -7,3 +7,5 @@ python-dotenv==1.0.1
 validators==0.22.0
 alembic==1.13.1
 asyncpg==0.29.0
+pytest==8.0.0
+requests==2.31.0
