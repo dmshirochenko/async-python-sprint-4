@@ -42,7 +42,7 @@ This project is a URL shortening service that allows users to create shorter ali
     http://127.0.0.1:8000/docs
     ```
 
-# Endpoint Documentation
+## Endpoint Documentation
 
 Available at the /docs path. 
 For a server running on localhost, access it via:
